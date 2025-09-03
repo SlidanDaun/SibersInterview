@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Добавить / Редактировать пользователя</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1 id="form-title">Добавить пользователя</h1>
+  <form id="user-form">
+    <label>Логин: <input type="text" name="username" required /></label><br />
+    <label>Пароль:
+      <div class="password-wrapper">
+        <input type="password" name="password" id="password" required />
+        <span class="toggle-password" id="togglePassword">👁️</span>
+      </div>
+    </label><br />
+    <label>
+      Администратор:
+      <input type="checkbox" name="isAdmin" id="isAdmin" />
+    </label><br /><br />
+    <label>Имя: <input type="text" name="first_name" /></label><br />
+    <label>Фамилия: <input type="text" name="last_name" /></label><br />
+    <label>Пол:
+      <select name="gender">
+        <option value="">—</option>
+        <option value="male">Мужской</option>
+        <option value="female">Женский</option>
+      </select>
+    </label><br />
+    <label>Дата рождения: <input type="date" name="birthdate" /></label><br />
+    <button type="submit">Сохранить</button>
+  </form>
+  <a href="/">Назад к списку</a>
+
+  <script>
+    const form = document.getElementById("user-form");
+    const isAdminCheckbox = document.getElementById("isAdmin");
+    const params = new URLSearchParams(window.location.search);
+    const editUsername = params.get("edit");
+
+    async function loadUserForEdit(username) {
+      const resp = await fetch(`/api/users/${username}`);
+      if (!resp.ok) return;
+      const user = await resp.json();
+
+      // Filling in the fields
+      document.getElementById("form-title").innerText = "Редактировать пользователя";
+      form.username.value = user.username;
+      form.username.disabled = true;
+      form.password.value = user.password;
+      form.first_name.value = user.first_name || "";
+      form.last_name.value = user.last_name || "";
+      form.gender.value = user.gender || "";
+      form.birthdate.value = user.birthdate || "";
+      isAdminCheckbox.checked = user.isAdmin === 1;
+    }
+
+    // Save the form
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      data.isAdmin = isAdminCheckbox.checked ? 1 : 0;
+
+      if (editUsername) {
+        await fetch(`/api/users/${editUsername}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+      } else {
+        await fetch("/api/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+      }
+      window.location.href = "/";
+    });
+
+    // Autorefreshing isAdmin after click
+    isAdminCheckbox.addEventListener("change", async () => {
+      if (!editUsername) return;
+      const data = { isAdmin: isAdminCheckbox.checked ? 1 : 0 };
+      await fetch(`/api/users/${editUsername}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+    });
+
+    if (editUsername) {
+      loadUserForEdit(editUsername);
+    }
+
+    // Show/hide password
+    const passwordInput = document.getElementById("password");
+    const toggleBtn = document.getElementById("togglePassword");
+    toggleBtn.addEventListener("click", () => {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleBtn.textContent = "🙈";
+      } else {
+        passwordInput.type = "password";
+        toggleBtn.textContent = "👁️";
+      }
+    });
+  </script>
+</body>
+</html>

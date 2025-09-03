@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f6fa;
+  color: #2f3640;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #2f3640;
+  font-size: 28px;
+  text-align: center;
+}
+
+a {
+  color: #0097e6;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background: #0097e6;
+  color: #fff;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f1f2f6;
+}
+
+tr:hover {
+  background: #dcdde1;
+}
+
+button {
+  padding: 6px 12px;
+  border: none;
+  background: #e84118;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #c23616;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+form label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+form input, form select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border: 1px solid #dcdde1;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+form button {
+  margin-top: 15px;
+  width: 100%;
+  background: #0097e6;
+}
+
+form button:hover {
+  background: #0984e3;
+}
+
+#user-detail {
+  max-width: 500px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+#user-detail p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.tableTitles {
+  color: white;
+}
+
+.password-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 30px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+}
+
+.logoutBtn {
+    display: block;
+    width: 100%;
+    margin: 15px auto;
+    font-size: 14px;
+  }
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 6px;
+  }
+
+  th, td {
+    padding: 10px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  button {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  form {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  form label {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  form input, form select {
+    font-size: 13px;
+    padding: 7px 9px;
+  }
+
+  form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #user-detail {
+    padding: 15px;
+  }
+
+  #user-detail p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 18px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+
+  a {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  .tableTitles {
+    font-size: 12px;
+  }
+
+  .toggle-password {
+    font-size: 14px;
+    right: 6px;
+  }
+}

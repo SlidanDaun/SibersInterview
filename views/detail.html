@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Информация о пользователе</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Детали пользователя</h1>
+  <div id="user-detail"></div>
+  <a href="/">Назад к списку</a>
+
+  <script>
+    async function loadDetail() {
+      const username = window.location.pathname.split("/").pop();
+      const resp = await fetch(`/api/users/${username}`);
+      if (!resp.ok) {
+        document.getElementById("user-detail").innerHTML = "<p>Пользователь не найден</p>";
+        return;
+      }
+      const user = await resp.json();
+      document.getElementById("user-detail").innerHTML = `
+        <p><b>Логин:</b> ${user.username}</p>
+        <p><b>Имя:</b> ${user.first_name || ""}</p>
+        <p><b>Фамилия:</b> ${user.last_name || ""}</p>
+        <p><b>Пол:</b> ${user.gender || ""}</p>
+        <p><b>Дата рождения:</b> ${user.birthdate || ""}</p>
+      `;
+    }
+    loadDetail();
+  </script>
+</body>
+</html>
