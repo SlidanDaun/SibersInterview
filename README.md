@@ -15,8 +15,8 @@ A small web application built with **Node.js, Express, and SQLite**.
 
 1. Clone the repository to your local machine:
 ```bash
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/SlidanDaun/SibersInterview.git
+cd SibersInterview
 ```
 
 2.	Install all required dependencies:
